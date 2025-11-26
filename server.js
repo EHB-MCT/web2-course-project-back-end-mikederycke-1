@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs').promises;
 const path = require('path');
 const bcrypt = require('bcrypt');
+const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
@@ -10,6 +11,7 @@ const USERS_FILE = path.join(__dirname, 'users.json');
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Helper function to read users from JSON file
 async function readUsers() {
