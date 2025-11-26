@@ -12,6 +12,11 @@ const USERS_FILE = path.join(__dirname, 'users.json');
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve API docs/home page at root without exposing other files
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 app.use(cors());
 
 // Helper function to read users from JSON file
@@ -48,13 +53,18 @@ app.get('/users', async (req, res) => {
                 return res.status(404).json({ error: 'User not found' });
             }
             // Remove password from response
-            const { password, ...userWithoutPassword } = user;
-            return res.json(userWithoutPassword);
+            // const { password, ...userWithoutPassword } = user;
+            // return res.json(userWithoutPassword);
+            //ONly for demo purposes, return password as well
+            return res.json(user);
         }
 
         // Return all users without passwords
-        const usersWithoutPasswords = users.map(({ password, ...user }) => user);
-        res.json(usersWithoutPasswords);
+        // const usersWithoutPasswords = users.map(({ password, ...user }) => user);
+        // res.json(usersWithoutPasswords);
+        //ONly for demo purposes, return password as well
+        res.json(users);
+
     } catch (error) {
         res.status(500).json({ error: 'Failed to retrieve users' });
     }

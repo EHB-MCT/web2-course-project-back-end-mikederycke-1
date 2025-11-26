@@ -5,5 +5,12 @@
     "email": "john@example.com",
     "password": "$2b$10$WeMsFzh1QDE08RLAjMs8oeQ7pVt7ZD9V0CaVgzs9M5FOf3Cg.yXwO",
     "profilePictureUrl": "https://example.com/avatar.jpg"
+  },
+  {
+    "id": "1764147158410",
+    "name": "John Doe 2",
+    "email": "john2@example.com",
+    "password": "$2b$10$CBJBiKJxyXVDd/sP1yFUdOqqzPk/r22UOrTAM3aIRmGfhgpPZ9XCy",
+    "profilePictureUrl": "https://example.com/avatar2.jpg"
   }
 ]

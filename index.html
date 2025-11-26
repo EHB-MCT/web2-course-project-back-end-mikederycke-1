@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Management API</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" />
+  <style>
+    body { background: #fafafa; }
+    .code { background:#263238; color:#ECEFF1; padding:12px; border-radius:8px; overflow:auto; }
+    pre { margin:0; }
+    .badge.method { margin-left:8px; }
+    .method.GET { background:#1e88e5; }
+    .method.POST { background:#43a047; }
+    .method.PUT { background:#fb8c00; }
+    .method.DELETE { background:#e53935; }
+    .endpoint { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .footer-note { color:#78909C; font-size:0.9rem; }
+  </style>
+</head>
+<body>
+  <nav class="teal">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">User Management API</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="section">
+      <h5>Overview</h5>
+      <p>
+        Simple Node + Express JSON-backed API for managing users. Passwords are securely hashed with bcrypt and never returned in responses.
+      </p>
+      <p class="footer-note">Base URL: <span class="endpoint" id="baseUrl">http://localhost:3000</span></p>
+    </div>
+
+    <div class="section">
+      <h5>Endpoints</h5>
+
+      <ul class="collapsible popout">
+        <li>
+          <div class="collapsible-header"><span class="endpoint">GET /users</span><span class="new badge method GET" data-badge-caption="GET"></span></div>
+          <div class="collapsible-body">
+            <p>Returns all users (without passwords).</p>
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Fetch Example</span>
+                <div class="code"><pre><code>fetch(`${base}/users`)
+  .then(r =&gt; r.json())
+  .then(console.log)
+  .catch(console.error);</code></pre></div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="collapsible-header"><span class="endpoint">GET /users?id=&lt;id&gt;</span><span class="new badge method GET" data-badge-caption="GET"></span></div>
+          <div class="collapsible-body">
+            <p>Returns a single user by id (without password).</p>
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Fetch Example</span>
+                <div class="code"><pre><code>const id = "USER_ID";
+fetch(`${base}/users?id=${id}`)
+  .then(r =&gt; r.json())
+  .then(console.log)
+  .catch(console.error);</code></pre></div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="collapsible-header"><span class="endpoint">POST /users</span><span class="new badge method POST" data-badge-caption="POST"></span></div>
+          <div class="collapsible-body">
+            <p>Creates a user. Required: <code>name</code>, <code>email</code>, <code>password</code>. Optional: <code>profilePictureUrl</code>.</p>
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Fetch Example</span>
+                <div class="code"><pre><code>fetch(`${base}/users`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: "Jane Doe",
+    email: "jane@example.com",
+    password: "StrongP@ssw0rd",
+    profilePictureUrl: "https://example.com/avatar.jpg"
+  })
+}).then(r =&gt; r.json())
+  .then(console.log)
+  .catch(console.error);</code></pre></div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="collapsible-header"><span class="endpoint">PUT /users/:id</span><span class="new badge method PUT" data-badge-caption="PUT"></span></div>
+          <div class="collapsible-body">
+            <p>Updates fields on an existing user. Email must remain unique. If <code>password</code> is provided, it will be re-hashed.</p>
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Fetch Example</span>
+                <div class="code"><pre><code>const id = "USER_ID";
+fetch(`${base}/users/${id}`, {
+  method: "PUT",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: "Jane Updated",
+    profilePictureUrl: "https://example.com/new-avatar.jpg"
+  })
+}).then(r =&gt; r.json())
+  .then(console.log)
+  .catch(console.error);</code></pre></div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="collapsible-header"><span class="endpoint">DELETE /users/:id</span><span class="new badge method DELETE" data-badge-caption="DELETE"></span></div>
+          <div class="collapsible-body">
+            <p>Deletes a user by id.</p>
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Fetch Example</span>
+                <div class="code"><pre><code>const id = "USER_ID";
+fetch(`${base}/users/${id}`, { method: "DELETE" })
+  .then(r =&gt; r.json())
+  .then(console.log)
+  .catch(console.error);</code></pre></div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="card blue-grey lighten-5">
+        <div class="card-content">
+          <span class="card-title">Notes</span>
+          <ul class="browser-default">
+            <li>Passwords are stored hashed (bcrypt) and never returned.</li>
+                <li> Except for development purposes, passwords are included in responses.</li>
+            <li>Email must be unique across users.</li>
+            <li>Data is persisted in a local <code>users.json</code> file.</li>
+                <li>This API is intended for learning and development purposes only.</li>
+                <li>This can be updated to use a database for production use like MongoDB</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section footer-note">
+      <p>Tip: Open the browser console to see example outputs.</p>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const elems = document.querySelectorAll('.collapsible');
+      M.Collapsible.init(elems, {});
+      const baseSpan = document.getElementById('baseUrl');
+      const base = `${location.protocol}//${location.host}`;
+      baseSpan.textContent = base;
+      window.base = base; // Available for examples in devtools
+    });
+  </script>
+</body>
+</html>
