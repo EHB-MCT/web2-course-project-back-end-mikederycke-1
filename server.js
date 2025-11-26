@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const USERS_FILE = path.join(__dirname, 'users.json');
 
 // Middleware
@@ -172,4 +172,7 @@ app.listen(PORT, () => {
     console.log('  POST   /users       - Create new user');
     console.log('  PUT    /users/:id   - Update user');
     console.log('  DELETE /users/:id   - Delete user');
+    console.log('Proces environment variables test:');
+    console.log(`  USERNAME: ${process.env.USERNAME}`);
+
 });
