@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -173,6 +174,6 @@ app.listen(PORT, () => {
     console.log('  PUT    /users/:id   - Update user');
     console.log('  DELETE /users/:id   - Delete user');
     console.log('Proces environment variables test:');
-    console.log(`  USERNAME: ${process.env.USERNAME}`);
+    console.log(`  MONGO_URI: ${process.env.MONGO_URI}`);
 
 });
