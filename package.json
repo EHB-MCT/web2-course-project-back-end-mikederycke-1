@@ -1,0 +1,17 @@
+{
+  "name": "user-management-server",
+  "version": "1.0.0",
+  "description": "Node Express server with user management",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["express", "node", "user-management"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "bcrypt": "^5.1.1"
+  }
+}

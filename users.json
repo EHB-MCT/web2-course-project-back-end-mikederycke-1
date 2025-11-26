@@ -1,0 +1,9 @@
+[
+  {
+    "id": "1764144679910",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "$2b$10$WeMsFzh1QDE08RLAjMs8oeQ7pVt7ZD9V0CaVgzs9M5FOf3Cg.yXwO",
+    "profilePictureUrl": "https://example.com/avatar.jpg"
+  }
+]
